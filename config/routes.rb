@@ -3,4 +3,15 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+  post 'api/v1/students', to: "students#create"
+
+  namespace :api do
+    namespace :v1 do
+      resources :schools , only: [] do
+        resources :klasses, only: %i[ index ] do
+          resources :students, only: %i[ destroy index ], shallow: true
+        end
+      end
+    end
+  end
 end
