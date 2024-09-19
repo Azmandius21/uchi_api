@@ -1,4 +1,4 @@
-class Api::V1::StudentsController < AppLicationController
+class Api::V1::StudentsController < ApplicationController
   before_action :set_student, only: [:destroy]
 
   def create
