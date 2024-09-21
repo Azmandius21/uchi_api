@@ -32,3 +32,6 @@
 
 # Ignore database settings
 /config/database.yml
+
+# Ignore docker settings
+/docker_dev/.env_docker

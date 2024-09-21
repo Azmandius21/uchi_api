@@ -1,0 +1,31 @@
+x-shared: &shared
+  env_file:
+    - ./docker_dev/.env_docker
+
+services:
+  postgresql:
+    <<: *shared
+    image: postgres:latest
+    volumes:
+      - postgresql_volume:/var/lib/postgresql/data
+    ports:
+      - 5405:5432
+  web:
+    <<: *shared
+    build:
+      dockerfile: ./docker_dev/Dockerfile
+      context: .
+    command: ./docker_dev/start_dev.sh
+    volumes:
+      - .:/app
+      - bundle:/bundle
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgresql
+
+volumes:
+  postgresql_volume:
+    driver: local
+  bundle:
+    driver: local
