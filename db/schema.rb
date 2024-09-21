@@ -10,46 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_13_164736) do
+ActiveRecord::Schema[7.0].define(version: 20_240_913_164_736) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "klasses", force: :cascade do |t|
-    t.integer "number", null: false
-    t.string "letter", null: false
-    t.integer "students_count"
-    t.bigint "school_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["school_id"], name: "index_klasses_on_school_id"
+  create_table 'klasses', force: :cascade do |t|
+    t.integer 'number', null: false
+    t.string 'letter', null: false
+    t.integer 'students_count'
+    t.bigint 'school_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['school_id'], name: 'index_klasses_on_school_id'
   end
 
-  create_table "schools", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'schools', force: :cascade do |t|
+    t.string 'name'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  create_table "students", force: :cascade do |t|
-    t.string "first_name", null: false
-    t.string "last_name", null: false
-    t.string "surname"
-    t.bigint "school_id", null: false
-    t.bigint "klass_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["klass_id"], name: "index_students_on_klass_id"
-    t.index ["school_id"], name: "index_students_on_school_id"
+  create_table 'students', force: :cascade do |t|
+    t.string 'first_name', null: false
+    t.string 'last_name', null: false
+    t.string 'surname'
+    t.bigint 'school_id', null: false
+    t.bigint 'klass_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['klass_id'], name: 'index_students_on_klass_id'
+    t.index ['school_id'], name: 'index_students_on_school_id'
   end
 
-  create_table "user_tokens", force: :cascade do |t|
-    t.string "token"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'user_tokens', force: :cascade do |t|
+    t.string 'token'
+    t.integer 'user_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  add_foreign_key "klasses", "schools"
-  add_foreign_key "students", "klasses"
-  add_foreign_key "students", "schools"
+  add_foreign_key 'klasses', 'schools'
+  add_foreign_key 'students', 'klasses'
+  add_foreign_key 'students', 'schools'
 end

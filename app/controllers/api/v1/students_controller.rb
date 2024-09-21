@@ -1,5 +1,4 @@
 class Api::V1::StudentsController < ApplicationController
-
   def index
     school = School.find(params[:school_id])
     klass = school.klasses.find(params[:klass_id])
@@ -20,10 +19,10 @@ class Api::V1::StudentsController < ApplicationController
       render json: @student
     end
 
-    unless @student.persisted?
-      render json: { errors: @student.errors.full_messages },
+    return if @student.persisted?
+
+    render json: { errors: @student.errors.full_messages },
            status: :method_not_allowed
-    end
   end
 
   def destroy
@@ -39,8 +38,6 @@ class Api::V1::StudentsController < ApplicationController
     @student.destroy
   end
 
-
-
   private
 
   def student_params
@@ -48,12 +45,12 @@ class Api::V1::StudentsController < ApplicationController
   end
 
   def render_bad_request
-    render json: { error: 'Некорректный id студента'},
+    render json: { error: 'Некорректный id студента' },
            status: :bad_request
   end
 
   def render_unauthorized
-    render json: { error: 'Некорректная авторизация'},
+    render json: { error: 'Некорректная авторизация' },
            status: :unauthorized
   end
 end
